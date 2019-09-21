@@ -141,10 +141,19 @@ read_udp2raw_password(){
 
 # 配置SS连接端口号
 config_ss_password(){
+    read -e -p "请输入SS的连接密码:" NEW_SS_PASSWORD
+    if [ ! -z "${NEW_SS_PASSWORD}" ]; then
+        SS_PASSWORD = NEW_SS_PASSWORD
+        echo -e "${Info} SS连接密码已修改为 ${SS_PASSWORD} !"
+    fi
+}
+
+# 配置SS连接端口号
+config_ss_port(){
     echo -e "请输入SS的服务端口号"
-    read -e -p "(当前的端口号是: ${SS_PORT}):" NEW_PORT
-    if [ ! -z "${NEW_PORT}" ]; then
-        SS_PORT = NEW_PORT
+    read -e -p "(当前的端口号是: ${SS_PORT}):" NEW_SS_PORT
+    if [ ! -z "${NEW_SS_PORT}" ]; then
+        SS_PORT = NEW_SS_PORT
         echo -e "${Info} SS连接端口已修改为 ${SS_PORT} !"
     fi
 }
@@ -152,11 +161,10 @@ config_ss_password(){
 # 配置SS加密方式
 config_ss_encryption(){
     echo -e "请输入SS的加密方式"
-    echo -e "可以使用的加密方式有：rc4-md5,aes-128-gcm, aes-192-gcm, aes-256-gcm,aes-128-cfb, aes-192-cfb, aes-256-cfb,aes-128-ctr, aes-192-ctr, aes-256-ctr,camellia-128-cfb, camellia-192-cfb,camellia-256-cfb, bf-cfb,chacha20-ietf-poly1305,xchacha20-ietf-poly1305,
-                              salsa20, chacha20 and chacha20-ietf.The default cipher is chacha20-ietf-poly1305."
-    read -e -p "(当前的加密方式是: ${SS_METHOD}):" NEW_METHOD
-    if [ ! -z "${NEW_PORT}" ]; then
-        SS_METHOD = NEW_METHOD
+    echo -e "可以使用的加密方式有：rc4-md5,aes-128-gcm, aes-192-gcm, aes-256-gcm,aes-128-cfb, aes-192-cfb, aes-256-cfb,aes-128-ctr, aes-192-ctr, aes-256-ctr,camellia-128-cfb, camellia-192-cfb,camellia-256-cfb, bf-cfb,chacha20-ietf-poly1305,xchacha20-ietf-poly1305,salsa20, chacha20 and chacha20-ietf"
+    read -e -p "(当前的加密方式是: ${SS_METHOD}):" NEW_SS_METHOD
+    if [ ! -z "${NEW_SS_METHOD}" ]; then
+        SS_METHOD = NEW_SS_METHOD
         echo -e "${Info} SS加密方式已修改为 ${SS_METHOD} !"
     fi
 }
