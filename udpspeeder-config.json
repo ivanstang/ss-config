@@ -1,0 +1,8 @@
+{
+	"listen": "0.0.0.0:4096",
+	"target": "127.0.0.1:8443",
+	"fec": "10:6",
+	"timeout": 3,
+	"key": "12345678",
+	"log": "/var/log/udpspeeder.log"
+}
