@@ -11,7 +11,7 @@ Error="${Red_font_prefix}[错误]${Font_color_suffix}"
 Tip="${Green_font_prefix}[注意]${Font_color_suffix}"
 
 DDNS_CONF=/root/ss-config/ddns-config.json
-SS_CONF=/root/ss-config/shadowsocksr-config.json
+SS_CONF=/root/ss-config/shadowsocks-config.json
 UDPSPEEDER_CONF=/root/ss-config/udpspeeder-config.json
 UDPSPEEDER_BIN=/root/ss-config/speederv2_amd64
 UDP2RAW_CONF=/root/ss-config/udp2raw.conf
