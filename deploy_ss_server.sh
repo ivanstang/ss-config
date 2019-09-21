@@ -121,24 +121,6 @@ verify_ddns(){
     fi
 }
 
-# 读取json配置文件中的password的值
-read_json_password(CONF_FILE){
-    if [ ! -f ${CONF_FILE} ]; then
-        echo "找不到配置文件 ${CONF_FILE}, 退出！"
-        exit 1
-    fi
-    PASSWORD=`cat ${CONF_FILE} | jq '.password' | sed 's/\"//g'`
-}
-
-# 读取json配置文件中的password的值
-read_ss_password(CONF_FILE){
-    if [ ! -f ${CONF_FILE} ]; then
-        echo "找不到SS配置文件 ${CONF_FILE}, 退出！"
-        exit 1
-    fi
-    PASSWORD=`cat ${CONF_FILE} | jq '.password' | sed 's/\"//g'`
-}
-
 # 读取json配置文件中的key的值
 read_udpspeeder_key(){
     if [ ! -f ${UDPSPEEDER_CONF} ]; then
@@ -155,30 +137,6 @@ read_udp2raw_password(){
         exit 1
     fi
     UDP2RAW_PASSWORD=`cat ${UDP2RAW_CONF} | grep '\-k' | awk '{print $2}'`
-}
-
-# 配置SS连接密码
-config_ss_password(){
-    echo -e "请输入SS的连接密码"
-    read -e -p "(当前的密码是: ${SS_PASSWORD}):" NEW_PASSWORD
-    if [ ! -z "${NEW_PASSWORD}" ]; then
-        SS_PASSWORD = NEW_PASSWORD
-        echo -e "${Info} SS连接密码已修改为 ${SS_PASSWORD} !"
-    fi
-
-    CONF_FILE="/root/ssr-config/udpspeeder-config.json"
-    
-
-    CONF_FILE="/root/ssr-config/udp2raw.conf"
-    read_conf_password
-    echo -e "请输入UDP2Raw的连接密码"
-    read -e -p "(当前的密码是: ${PASSWORD}):" NEW_PASSWORD
-    if [ ! -z "${NEW_PASSWORD}" ]; then
-        sed -i "s/${PASSWORD}/${NEW_PASSWORD}/g" "${CONF_FILE}"
-        read_conf_password
-        [[ "${PASSWORD}" != "${NEW_PASSWORD}" ]] && echo -e "${Error} UDP2Raw连接密码修改失败 !" && exit 1
-        echo -e "${Info} UDP2Raw连接密码已修改为 ${NEW_PASSWORD} !"
-    fi
 }
 
 # 配置SS连接端口号
